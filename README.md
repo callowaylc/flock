@@ -1,6 +1,6 @@
 # flock
 
-Example of opportunistic locking, using `flock`, to implement a semaphore-like access strategy.
+Example of [opportunistic locking](https://en.wikipedia.org/wiki/Optimistic_concurrency_control), using [flock](https://linux.die.net/man/1/flock), to implement a binary [semaphore](https://en.wikipedia.org/wiki/Semaphore_(programming)) as a means to coordinate parallel processes.
 
 
 ## Requirements
@@ -27,7 +27,7 @@ git clone git@github.com:callowaylc-highlight/flock
 
 ## Usage
 
-Run make to start process with epoch used as surrogate key.
+Run `make` to start process with epoch used as surrogate key.
 ```sh
 $ echo $$
 82052
@@ -39,7 +39,7 @@ Sep 28 09:28:35  christian[81891] <Debug>: Polling id=1601299715 time=0
 Sep 28 09:28:40  christian[81893] <Debug>: Polling id=1601299715 time=5
 ```
 
-In a second terminal, run make, which will launch the process but will block on waiting for semephore.
+In a second terminal, run `make`, which will launch the process and block on aquiring semaphore.
 ```sh
 $ echo $$
 82064
@@ -54,7 +54,7 @@ In the first terminal, sigkill `ctrl-c` the polling process.
 make: *** [run] Error 130
 ```
 
-Now flip back the second terminal, which should have aquired an exclusive lock.
+Now flip back the second terminal, will will have aquired an exclusive lock.
 ```sh
 make
 ./main.sh 1601300128
